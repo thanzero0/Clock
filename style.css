@@ -1,0 +1,112 @@
+:root {
+    --bg-color: #050505;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --primary-text: #ffffff;
+    --secondary-text: rgba(255, 255, 255, 0.5);
+    --accent-color: #00d2ff;
+    --glow-color: rgba(0, 210, 255, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: var(--primary-text);
+}
+
+/* Animated Background */
+body::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: var(--accent-color);
+    filter: blur(150px);
+    border-radius: 50%;
+    z-index: -1;
+    animation: move 20s infinite alternate;
+}
+
+@keyframes move {
+    from {
+        transform: translate(-50%, -50%);
+    }
+
+    to {
+        transform: translate(50%, 50%);
+    }
+}
+
+.container {
+    perspective: 1000px;
+}
+
+.clock-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3rem 5rem;
+    border-radius: 40px;
+    text-align: center;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.clock-card:hover {
+    transform: translateY(-5px);
+}
+
+.day-text {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.time-text {
+    font-size: 8rem;
+    font-weight: 700;
+    line-height: 1;
+    margin: 1rem 0;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 30px var(--glow-color);
+}
+
+.date-text {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--secondary-text);
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .time-text {
+        font-size: 4rem;
+    }
+
+    .clock-card {
+        padding: 2rem;
+    }
+
+    .day-text {
+        font-size: 0.8rem;
+    }
+
+    .date-text {
+        font-size: 1rem;
+    }
+}
