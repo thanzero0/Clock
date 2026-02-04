@@ -15,21 +15,21 @@
     </div>
 
     <div id="settings-panel" class="hidden">
-        <div class="setting-item">
-            <label>Show Date</label>
-            <input type="checkbox" id="toggle-date" checked>
+        <div class="setting-group">
+            <span class="setting-label">Display</span>
+            <div class="setting-controls">
+                <button id="toggle-date-btn" class="ui-button active">Date</button>
+                <button id="toggle-24h-btn" class="ui-button active">24H</button>
+            </div>
         </div>
-        <div class="setting-item">
-            <label>24H Format</label>
-            <input type="checkbox" id="toggle-24h" checked>
-        </div>
-        <div class="setting-item">
-            <label>Precision</label>
-            <select id="precision-select">
-                <option value="h">H</option>
-                <option value="hm">H:M</option>
-                <option value="hms" selected>H:M:S</option>
-            </select>
+
+        <div class="setting-group">
+            <span class="setting-label">Precision</span>
+            <div class="setting-controls" id="precision-group">
+                <button class="ui-button" data-value="h">H</button>
+                <button class="ui-button" data-value="hm">M</button>
+                <button class="ui-button active" data-value="hms">S</button>
+            </div>
         </div>
     </div>
 

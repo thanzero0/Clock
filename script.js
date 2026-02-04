@@ -37,35 +37,47 @@ function updateClock() {
     }
 }
 
-// UI Elements & Listeners
+// UI Elements
 const settingsBtn = document.getElementById('settings-btn');
 const settingsPanel = document.getElementById('settings-panel');
-const toggleDateInput = document.getElementById('toggle-date');
-const toggle24hInput = document.getElementById('toggle-24h');
-const precisionSelect = document.getElementById('precision-select');
+const dateBtn = document.getElementById('toggle-date-btn');
+const formatBtn = document.getElementById('toggle-24h-btn');
+const precisionBtns = document.querySelectorAll('#precision-group .ui-button');
 
-settingsBtn.addEventListener('click', () => {
+// Toggle Settings Panel
+settingsBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     settingsPanel.classList.toggle('hidden');
 });
 
-toggleDateInput.addEventListener('change', (e) => {
-    showDate = e.target.checked;
+// Toggle Date
+dateBtn.addEventListener('click', () => {
+    showDate = !showDate;
+    dateBtn.classList.toggle('active', showDate);
     updateClock();
 });
 
-toggle24hInput.addEventListener('change', (e) => {
-    use24h = e.target.checked;
+// Toggle 24H/12H
+formatBtn.addEventListener('click', () => {
+    use24h = !use24h;
+    formatBtn.classList.toggle('active', use24h);
+    formatBtn.textContent = use24h ? '24H' : '12H';
     updateClock();
 });
 
-precisionSelect.addEventListener('change', (e) => {
-    precision = e.target.value;
-    updateClock();
+// Precision Controls
+precisionBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        precision = btn.dataset.value;
+        precisionBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        updateClock();
+    });
 });
 
 // Close panel when clicking outside
 document.addEventListener('click', (e) => {
-    if (!settingsBtn.contains(e.target) && !settingsPanel.contains(e.target)) {
+    if (!settingsPanel.contains(e.target) && !settingsBtn.contains(e.target)) {
         settingsPanel.classList.add('hidden');
     }
 });
