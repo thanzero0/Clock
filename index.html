@@ -14,6 +14,25 @@
         <div id="date">WEDNESDAY, FEBRUARY 04, 2026</div>
     </div>
 
+    <div id="settings-panel" class="hidden">
+        <div class="setting-item">
+            <label>Show Date</label>
+            <input type="checkbox" id="toggle-date" checked>
+        </div>
+        <div class="setting-item">
+            <label>24H Format</label>
+            <input type="checkbox" id="toggle-24h" checked>
+        </div>
+        <div class="setting-item">
+            <label>Precision</label>
+            <select id="precision-select">
+                <option value="h">H</option>
+                <option value="hm">H:M</option>
+                <option value="hms" selected>H:M:S</option>
+            </select>
+        </div>
+    </div>
+
     <button id="settings-btn" title="Settings">⚙️</button>
 
     <script src="script.js"></script>
