@@ -216,8 +216,14 @@ body {
     border-radius: 12px;
     position: relative;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+}
+
+.switch:active {
+    transform: scale(0.92);
 }
 
 .switch .dot {
@@ -226,18 +232,29 @@ body {
     background: var(--text-secondary);
     border-radius: 50%;
     position: absolute;
-    top: 2px;
     left: 2px;
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.switch:active .dot {
+    width: 24px;
 }
 
 .switch.active {
     background: var(--accent-color);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .switch.active .dot {
-    left: 22px;
+    left: calc(100% - 20px);
     background: #000;
+    box-shadow: none;
+}
+
+.switch.active:active .dot {
+    left: calc(100% - 26px);
 }
 
 /* Segmented Control Styling */
@@ -263,6 +280,10 @@ body {
     font-weight: 600;
 }
 
+.segment:active {
+    transform: scale(0.95);
+}
+
 .segment.active {
     background: rgba(255, 255, 255, 0.1);
     color: var(--text-primary);
@@ -272,4 +293,22 @@ body {
 .segment:hover:not(.active) {
     color: var(--text-primary);
     background: rgba(255, 255, 255, 0.05);
+}
+
+@keyframes switch-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+.switch-animate {
+    animation: switch-pulse 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }

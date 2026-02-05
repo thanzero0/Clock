@@ -58,6 +58,11 @@ dateSwitch.addEventListener('click', () => {
     showDate = !showDate;
     dateSwitch.classList.toggle('active', showDate);
     dateElement.classList.toggle('hidden', !showDate);
+
+    // Trigger animation
+    dateSwitch.classList.remove('switch-animate');
+    void dateSwitch.offsetWidth; // Force reflow
+    dateSwitch.classList.add('switch-animate');
 });
 
 // Toggle 24H/12H (Switch)
@@ -65,6 +70,11 @@ formatSwitch.addEventListener('click', () => {
     use24h = !use24h;
     formatSwitch.classList.toggle('active', use24h);
     updateClock();
+
+    // Trigger animation
+    formatSwitch.classList.remove('switch-animate');
+    void formatSwitch.offsetWidth; // Force reflow
+    formatSwitch.classList.add('switch-animate');
 });
 
 // Precision Controls (Segments)
