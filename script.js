@@ -22,27 +22,30 @@ function updateClock() {
     let timeString = h;
     if (precision === 'hm' || precision === 'hms') timeString += `:${m}`;
     if (precision === 'hms') timeString += `:${s}`;
-    if (!use24h) timeString += ` ${ampm}`;
+    if (!use24h) timeString += ` <span style="font-size: 0.4em; opacity: 0.5; font-family: 'Inter'">${ampm}</span>`;
 
-    document.getElementById('time').textContent = timeString;
+    const timeElement = document.getElementById('time');
+    if (timeElement.innerHTML !== timeString) {
+        timeElement.innerHTML = timeString;
+    }
 
-    // Date Visibility Logic
+    // Date Update Logic
     const dateElement = document.getElementById('date');
-    if (showDate) {
-        dateElement.style.display = 'block';
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        dateElement.textContent = now.toLocaleDateString('en-US', options);
-    } else {
-        dateElement.style.display = 'none';
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dateString = now.toLocaleDateString('en-US', options).toUpperCase();
+
+    if (dateElement.textContent !== dateString) {
+        dateElement.textContent = dateString;
     }
 }
 
 // UI Elements
 const settingsBtn = document.getElementById('settings-btn');
 const settingsPanel = document.getElementById('settings-panel');
-const dateBtn = document.getElementById('toggle-date-btn');
-const formatBtn = document.getElementById('toggle-24h-btn');
-const precisionBtns = document.querySelectorAll('#precision-group .ui-button');
+const dateSwitch = document.getElementById('toggle-date-btn');
+const formatSwitch = document.getElementById('toggle-24h-btn');
+const precisionBtns = document.querySelectorAll('.segment');
+const dateElement = document.getElementById('date');
 
 // Toggle Settings Panel
 settingsBtn.addEventListener('click', (e) => {
@@ -50,22 +53,21 @@ settingsBtn.addEventListener('click', (e) => {
     settingsPanel.classList.toggle('hidden');
 });
 
-// Toggle Date
-dateBtn.addEventListener('click', () => {
+// Toggle Date (Switch)
+dateSwitch.addEventListener('click', () => {
     showDate = !showDate;
-    dateBtn.classList.toggle('active', showDate);
-    updateClock();
+    dateSwitch.classList.toggle('active', showDate);
+    dateElement.classList.toggle('hidden', !showDate);
 });
 
-// Toggle 24H/12H
-formatBtn.addEventListener('click', () => {
+// Toggle 24H/12H (Switch)
+formatSwitch.addEventListener('click', () => {
     use24h = !use24h;
-    formatBtn.classList.toggle('active', use24h);
-    formatBtn.textContent = use24h ? '24H' : '12H';
+    formatSwitch.classList.toggle('active', use24h);
     updateClock();
 });
 
-// Precision Controls
+// Precision Controls (Segments)
 precisionBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         precision = btn.dataset.value;
@@ -82,5 +84,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-setInterval(updateClock, 1000);
+// Initialize
+setInterval(updateClock, 100); // Faster update for better responsiveness
 updateClock();

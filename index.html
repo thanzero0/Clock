@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Clock</title>
+    <title>Premium Digital Clock</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -15,20 +15,26 @@
     </div>
 
     <div id="settings-panel" class="hidden">
-        <div class="setting-group">
-            <span class="setting-label">Display</span>
-            <div class="setting-controls">
-                <button id="toggle-date-btn" class="ui-button active">Date</button>
-                <button id="toggle-24h-btn" class="ui-button active">24H</button>
+        <div class="setting-item">
+            <span class="setting-label">Show Date</span>
+            <div id="toggle-date-btn" class="switch active">
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="setting-item">
+            <span class="setting-label">24H Format</span>
+            <div id="toggle-24h-btn" class="switch active">
+                <div class="dot"></div>
             </div>
         </div>
 
         <div class="setting-group">
             <span class="setting-label">Precision</span>
-            <div class="setting-controls" id="precision-group">
-                <button class="ui-button" data-value="h">H</button>
-                <button class="ui-button" data-value="hm">M</button>
-                <button class="ui-button active" data-value="hms">S</button>
+            <div class="segmented-control" id="precision-group">
+                <button class="segment" data-value="h">H</button>
+                <button class="segment" data-value="hm">M</button>
+                <button class="segment active" data-value="hms">S</button>
             </div>
         </div>
     </div>
